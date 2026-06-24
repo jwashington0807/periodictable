@@ -1,0 +1,9 @@
+# Copy this file to terraform.tfvars and fill in your values.
+# Run this once before deploying the prod environment.
+# Authenticate to the prod AWS account before running:
+#   aws sso login --profile <your-prod-aws-cli-profile>
+
+aws_region   = "us-east-1"
+aws_profile  = "<your-prod-aws-cli-profile>"
+project_name = "<your-project-name>"
+environments = ["prod"]

@@ -1,6 +1,6 @@
 # Define a security group for the web server
 resource "aws_security_group" "web" {
-    name        = "${var.projectname}-web-sg"
+    name        = "${var.name_prefix}-web-sg"
     description = "Allow SSH and HTTP"
     vpc_id      = var.vpc_id
     
@@ -23,15 +23,17 @@ resource "aws_security_group" "web" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-  tags = {
-    Name        = "${var.projectname}-web-sg"
-    Environment = var.environment
-  }
+  tags = merge(
+        var.tags,
+        {
+            Name = "${var.name_prefix}-web-sg"
+        }
+    )
 }
 
 # Database Security Group
 resource "aws_security_group" "db" {
-  name        = "${var.projectname}-db-sg"
+  name        = "${var.name_prefix}-db-sg"
   description = "Security group for RDS - allows MySQL from web server only"
   vpc_id      = var.vpc_id
 
@@ -51,8 +53,10 @@ resource "aws_security_group" "db" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name        = "${var.projectname}-db-sg"
-    Environment = var.environment
-  }
+  tags = merge(
+        var.tags,
+        {
+            Name = "${var.name_prefix}-db-sg"
+        }
+    )
 }

@@ -9,13 +9,15 @@ resource "random_id" "suffix" {
 }
 
 resource "aws_secretsmanager_secret" "db_password" {
-  name        = "${var.projectname}-${var.environment}-db-password-${random_id.suffix.hex}"
-  description = "Database password for ${var.projectname}"
+  name        = "${var.name_prefix}-db-password-${random_id.suffix.hex}"
+  description = "Database password for ${var.name_prefix}"
 
-  tags = {
-    Name        = "${var.projectname}-db-password"
-    Environment = var.environment
-  }
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.name_prefix}-db-password"
+    }
+  )
 }
 
 resource "aws_secretsmanager_secret_version" "db_password" {

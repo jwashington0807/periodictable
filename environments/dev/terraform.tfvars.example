@@ -1,0 +1,37 @@
+# Copy this file to terraform.tfvars and fill in your values.
+# Sensitive values (db_username) should be passed via environment variable:
+#   export TF_VAR_db_username="your-username"
+
+# Cloud settings
+aws_region     = "us-east-1"
+aws_profile    = "<your-sso-profile-name>"
+aws_account_id = "<your-dev-account-id>"
+environment    = "dev"
+project_name   = "<your-project-name>"
+
+# Networking
+cidr_block             = "10.0.0.0/16"
+aws_availability_zones = ["us-east-1a", "us-east-1b"]
+public_subnets         = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnets        = ["10.0.3.0/24", "10.0.4.0/24"]
+
+# Application
+app_name           = "<your-app-name>"
+ec2_instance_type  = "t3.micro"
+ec2_instance_count = 2
+ec2_ami            = "<ami-id-for-your-region>"
+domain_name        = "<your-domain.com>"
+
+# ACM Certificate
+acm_validation_method = "DNS"
+
+# Database
+db_name              = "appdb"
+db_username          = "admin"   # prefer TF_VAR_db_username instead
+db_instance_class    = "db.t3.micro"
+db_allocated_storage = 10
+db_engine            = "mysql"
+db_engine_version    = "8.0"
+
+# Feature flags
+enable_monitoring = true

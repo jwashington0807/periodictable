@@ -1,0 +1,7 @@
+# Copy this file to terraform.tfvars and fill in your values.
+# Run this once before deploying the dev environment.
+
+aws_region   = "us-east-1"
+aws_profile  = "<your-dev-aws-cli-profile>"
+project_name = "<your-project-name>"
+environment = "dev"
